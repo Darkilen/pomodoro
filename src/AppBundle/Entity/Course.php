@@ -72,8 +72,9 @@ class Course
      */
     public function __construct()
     {
-        $this->dateCreate = new \DateTime();
-        $this->dateUpdate = new \DateTime();
+      $this->dateCreate = new \Datetime();
+      $this->dateUpdate = new \Datetime();
+
     }
 
     /**

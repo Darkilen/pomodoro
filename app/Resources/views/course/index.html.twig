@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Courses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Dateuse</th>
+                <th>Datecreate</th>
+                <th>Dateupdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for course in courses %}
+            <tr>
+                <td><a href="{{ path('_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
+                <td>{{ course.title }}</td>
+                <td>{{ course.summary }}</td>
+                <td>{% if course.dateUse %}{{ course.dateUse|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if course.dateCreate %}{{ course.dateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if course.dateUpdate %}{{ course.dateUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('_show', { 'id': course.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('_edit', { 'id': course.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('_new') }}">Create a new course</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -66,6 +66,16 @@ class Course
     {
         return $this->id;
     }
+    /**
+     * Construct
+     *
+     */
+    public function __construct()
+    {
+      $this->dateCreate = new \Datetime();
+      $this->DateUpdate = new \Datetime();
+
+    }
 
     /**
      * Set title
@@ -187,4 +197,3 @@ class Course
         return $this->dateUpdate;
     }
 }
-

@@ -13,9 +13,9 @@ class CourseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('summary')->add('dateUse')->add('dateCreate')->add('dateUpdate');
+        $builder->add('title')->add('summary')->add('dateUse');
     }
-    
+
     /**
      * {@inheritdoc}
      */

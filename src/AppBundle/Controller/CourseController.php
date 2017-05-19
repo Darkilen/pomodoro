@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Course;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
@@ -32,6 +33,17 @@ class CourseController extends Controller
     }
 
     /**
+     * Get a json.
+     *
+     * @Route("/json", name="_json")
+     * @Method({"GET"})
+     */
+    public function jsonAction(Request $request)
+    {
+        return new Response("{status: green}", 200, array('content-type' => 'application/json'));
+    }
+
+    /**
      * Creates a new course entity.
      *
      * @Route("/new", name="_new")
@@ -50,6 +62,7 @@ class CourseController extends Controller
 
             return $this->redirectToRoute('_show', array('id' => $course->getId()));
         }
+    //    return new Response("{status: green}", 200);
 
         return $this->render('course/new.html.twig', array(
             'course' => $course,

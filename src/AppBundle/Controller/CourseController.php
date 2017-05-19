@@ -70,28 +70,26 @@ class CourseController extends Controller
    */
   public function newAction(Request $request)
   {
-    $data=$request->request->get("appbundle_course");
-    dump($data);
+    $title=$request->request->get("title");
+    dump($title);
     $course = new Course();
-    $course->setTitle($data["title"]);
-    $course->setSummary($data["summary"]);
+    $course->setTitle($title);
+    $course->setSummary("Default description");
     $course->setDateUse(new \DateTime());
     dump($request);
-    $form = $this->createForm('AppBundle\Form\CourseType', $course);
-    $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
+    if (isset($title) && $request->isMethod('POST')) {
       $em = $this->getDoctrine()->getManager();
       $em->persist($course);
       $em->flush();
-
-      //return $this->redirectToRoute('_show', array('id' => $course->getId()));
+      $response = new Response("OK", 200);
+      $response->headers->set("Access-Control-Allow-Origin", "*");
+      return $response;
     }
 
-    return $this->render('course/new.html.twig', array(
-      'course' => $course,
-      'form' => $form->createView(),
-    ));
+    $response = new Response("Des soucis dans votre requète ? Allez voir Samuel et Mohamed !", 200);
+    $response->headers->set("Access-Control-Allow-Origin", "*");
+    return $response;
   }
 
   /**
